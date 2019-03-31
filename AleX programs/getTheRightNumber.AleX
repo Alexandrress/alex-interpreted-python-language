@@ -1,0 +1,8 @@
+|numberGuess = 0
+PRINT "The number that you have to guess is between one and one hundred."
+
+INPUT "Enter a number : " |numberGuess
+
+IF 26 == |numberGuess THEN
+	PRINT "Congratulations! It is the correct number! :D"
+ENDIF
