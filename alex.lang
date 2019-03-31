@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="alex" name="AleX" version="2.0" _section="Other">
+  <metadata>
+    <property name="globs">*.AleX</property>
+  </metadata>
+  <styles>
+    <style id="comment" name="Comment" map-to="def:comment"/>
+    <style id="string" name="String" map-to="def:string"/>
+    <style id="escaped-character" name="Escaped Character" map-to="def:special-char"/>
+    <style id="preprocessor" name="Preprocessor" map-to="def:preprocessor"/>
+    <style id="included-file" name="Included File" map-to="def:string"/>
+    <style id="char" name="Character" map-to="def:character"/>
+    <style id="keyword" name="Keyword" map-to="def:keyword"/>
+    <style id="type" name="Data Type" map-to="def:type"/>
+  </styles>
+  <definitions>
+    <context id="alex">
+      <include>
+
+        <context id="comment" style-ref="comment">
+          <start>~</start>
+          <end>~</end>
+        </context>
+
+        <context id="string" end-at-line-end="true" style-ref="string">
+          <start>"</start>
+          <end>"</end>
+          <include>
+            <context id="escape" style-ref="escaped-character">
+              <match>\\.</match>
+            </context>
+          </include>
+        </context>
+
+        <context id="char" end-at-line-end="true" style-ref="string">
+          <start>'</start>
+          <end>'</end>
+          <include>
+            <context ref="escape"/>
+          </include>
+        </context>
+
+        <context id="keywords" style-ref="keyword">
+          <keyword>IF</keyword>
+          <keyword>THEN</keyword>
+          <keyword>ENDIF</keyword>
+        </context>
+
+        <context id="if0-comment" style-ref="comment">
+          <start>^#if 0\b</start>
+          <end>^#(endif)\b</end>
+          <include>
+            <context id="if-in-if0">
+              <start>^#if(n?def)?\b</start>
+              <end>^#endif\b</end>
+              <include>
+                <context ref="if-in-if0"/>
+              </include>
+            </context>
+          </include>
+        </context>
+
+        <context id="preprocessor" style-ref="preprocessor">
+          <keyword>if(n?def)?</keyword>
+          <keyword>endif</keyword>
+        </context>
+
+      </include>
+    </context>
+  </definitions>
+</language>
