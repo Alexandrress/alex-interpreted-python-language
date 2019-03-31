@@ -6,3 +6,5 @@ INPUT "Enter a number : " |numberGuess
 IF 26 == |numberGuess THEN
 	PRINT "Congratulations! It is the correct number! :D"
 ENDIF
+
+~ This is a very basic program since there is no <, > and while yet in the language. ~
