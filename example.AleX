@@ -1,26 +1,22 @@
-|VARIABLE = "Hello"
-|VAr2 = "Hdqdqsdqd"
-|ageAlex = 19-1
-|ageAlexd = |ageAlex
+|VARIABLENAME = "Hello World"
+|VAR = 5
+|VAR2 = 5+8-(5-2)*5
 
-PRINT "TEST PRINT"
-PRINT "Vive"
-PRINT "le"
-PRINT "AleX"
-
-PRINT "TEST NUM AND EXPR"
+PRINT "This is a normal PRINT in AleX"
+PRINT "I'm now going to PRINT an EXPR and a NUM"
 PRINT 10 - (2/2) + (1+4)
 PRINT 21595
 
-PRINT "TEST VAR PRINT"
-PRINT |ageAlexd
-PRINT |VAr2
+PRINT "I'm now going to print VAR"
+PRINT |VARIABLENAME
+PRINT |VAR
+PRINT |VAR2
 
-PRINT "TEST INPUT"
-INPUT "Enter your name : " |nameAlex
-PRINT |nameAlex
+PRINT "You can also ask for user INPUT"
+INPUT "Enter your age : " |age
+PRINT |age
 
-PRINT "TEST IF"
-IF 1 == 1 THEN
-	PRINT "HELLO WORLD"
+PRINT "You can also check conditions"
+IF 90 == |age THEN
+	PRINT "Wow, old dude!"
 ENDIF
