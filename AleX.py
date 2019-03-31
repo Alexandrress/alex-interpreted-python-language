@@ -18,113 +18,125 @@ def lex(filecontents):
 	state = 0
 	isexpr = 0
 	varStarted = 0
+	com = 0
 	var = ""
 	expr = ""
 	n = ""
 	filecontents = list(filecontents)
 	for char in filecontents:
 		token += char
-		if token == " ":
-			if state==0:
-				token=""
-				if varStarted==1: #You can't have space in VAR
+		if token == "~" :
+			if com == 1 :
+				com = 0
+			else :
+				com = 1
+			token=""
+		if com == 1 :
+			token=""
+		else :
+			if token == " ":
+				if state==0:
+					token=""
+					if varStarted==1: #You can't have space in VAR
+						tokens.append("VAR:" + var)
+						var = ""
+						varStarted=0
+				else:
+					token=" "
+			elif token == "\n" or token == "<EOF>":
+				if expr != "" and isexpr == 1:
+					tokens.append("EXPR:" + expr)
+					expr = ""
+					isexpr = 0
+				elif expr != "" and isexpr == 0:
+					tokens.append("NUM:" + expr)
+					expr = ""
+				elif var != "":
 					tokens.append("VAR:" + var)
 					var = ""
 					varStarted=0
-			else:
-				token=" "
-		elif token == "\n" or token == "<EOF>":
-			if expr != "" and isexpr == 1:
-				tokens.append("EXPR:" + expr)
-				expr = ""
-				isexpr = 0
-			elif expr != "" and isexpr == 0:
-				tokens.append("NUM:" + expr)
-				expr = ""
-			elif var != "":
-				tokens.append("VAR:" + var)
-				var = ""
-				varStarted=0
-			token = ""
-		elif token == "=" and state == 0:
-			if expr != "" and isexpr == 0:
-				tokens.append("NUM:" + expr)
-				expr = ""
-			if var != "":
-				tokens.append("VAR:" + var)
-				var = ""
-				varStarted=0
-			if  tokens[-1] == "EQUALS":
-				tokens[-1]=("EQEQ")
-			else:
-				tokens.append("EQUALS")
-			token=""
-		elif token == "|" and state == 0:
-			varStarted = 1
-			var += token
-			token = ""
-		elif varStarted == 1:
-			if token == "<" or token == ">":
+				token = ""
+			elif token == "=" and state == 0:
+				if expr != "" and isexpr == 0:
+					tokens.append("NUM:" + expr)
+					expr = ""
 				if var != "":
 					tokens.append("VAR:" + var)
 					var = ""
 					varStarted=0
-			var += token
-			token = ""
-		elif token.upper() == "PRINT":
-			tokens.append("PRINT")
-			token = ""
-		elif token.upper() == "INPUT":
-			tokens.append("INPUT")
-			token = ""
-		elif token.upper() == "ENDIF":
-			tokens.append("ENDIF")
-			token = ""
-		elif token.upper() == "IF":
-			tokens.append("IF")
-			token = ""
-		elif token.upper() == "THEN":
-			if expr != "" and isexpr == 0:
-				tokens.append("NUM:" + expr)
-				expr = ""
-			if expr != "" and isexpr == 1:
-				tokens.append("EXPR:" + expr)
-				expr = ""
-				isexpr = 0
-			if var != "" and varStarted==1:
-				tokens.append("VAR:" + var)
-				var = ""
-				varStarted=0
-			tokens.append("THEN")
-			token = ""
-		elif token>="0" and token<="9﻿" :
-			expr += token
-			token = ""
-		elif token in ["+","-","*","/","(",")","%"]:
-			isexpr = 1
-			expr += token
-			token = ""
-		elif token == "\t" :
-			token=""
-		elif token == "\"" or token == " \"":
-			if state == 0:
-				state = 1
-			elif state ==1:
-				tokens.append("STRING:" + string + "\"")
-				string = ""
-				state = 0
+				if  tokens[-1] == "EQUALS":
+					tokens[-1]=("EQEQ")
+				else:
+					tokens.append("EQUALS")
+				token=""
+			elif token == "|" and state == 0:
+				varStarted = 1
+				var += token
 				token = ""
-		elif state == 1:
-			string += token
-			token = ""
+			elif varStarted == 1:
+				if token == "<" or token == ">":
+					if var != "":
+						tokens.append("VAR:" + var)
+						var = ""
+						varStarted=0
+				var += token
+				token = ""
+			elif token.upper() == "PRINT":
+				tokens.append("PRINT")
+				token = ""
+			elif token.upper() == "INPUT":
+				tokens.append("INPUT")
+				token = ""
+			elif token.upper() == "ENDIF":
+				tokens.append("ENDIF")
+				token = ""
+			elif token.upper() == "IF":
+				tokens.append("IF")
+				token = ""
+			elif token.upper() == "THEN":
+				if expr != "" and isexpr == 0:
+					tokens.append("NUM:" + expr)
+					expr = ""
+				if expr != "" and isexpr == 1:
+					tokens.append("EXPR:" + expr)
+					expr = ""
+					isexpr = 0
+				if var != "" and varStarted==1:
+					tokens.append("VAR:" + var)
+					var = ""
+					varStarted=0
+				tokens.append("THEN")
+				token = ""
+			elif token>="0" and token<="9﻿" :
+				expr += token
+				token = ""
+			elif token in ["+","-","*","/","(",")","%"]:
+				isexpr = 1
+				expr += token
+				token = ""
+			elif token == "\t" :
+				token=""
+			elif token == "\"" or token == " \"":
+				if state == 0:
+					state = 1
+				elif state ==1:
+					tokens.append("STRING:" + string + "\"")
+					string = ""
+					state = 0
+					token = ""
+			elif state == 1:
+				string += token
+				token = ""
 	return tokens
 	
 def evalExpression(expr):
 	return (eval(expr, {'__builtins__':{}}))
-	
+
 def doPRINT(toPRINT):
 	if(toPRINT[0:6] == "STRING"):
 		toPRINT= toPRINT[8:-1]
+		if(toPRINT == "\\n"):
+			toPRINT=""
 	elif(toPRINT[0:3] == "NUM"):
 		toPRINT= toPRINT[4:]
 	elif(toPRINT[0:4] == "EXPR"):
