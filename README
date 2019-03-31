@@ -1,0 +1,14 @@
+In order to use this language on Linux you need DEZIP the archive in a folder, and open a terminal in this folder.
+
+Then proceed with the following command :
+python3 AleX.py *.AleX
+
+You need to have Python installed.
+
+---------------------------------
+
+There is a file named example.AleX which contains all of the language possibilities.
+
+Keep in mind this is nowhere near a full-fleshed language. It is just a personal project of mine! If you make program with it, I would love to see! Send me an e-mail!
+
+Thanks to howCode for the massive help.
