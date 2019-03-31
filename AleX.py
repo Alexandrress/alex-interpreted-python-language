@@ -2,7 +2,6 @@ from sys import *
 import fnmatch
 
 tokens=[]
-num_stack=[]
 symbols = {}
 
 def open_file(filename):
@@ -110,32 +109,11 @@ def lex(filecontents):
 		elif state == 1:
 			string += token
 			token = ""
-	#print (tokens)
-	#return ""
 	return tokens
 	
 def evalExpression(expr):
 	return (eval(expr, {'__builtins__':{}}))
 
-	"""
-	expr = "," + expr
-	i = len(expr) - 1
-	num=""
-	while i >= 0:
-		if (expr[i] in ["+","-","*","/","%"]):
-			num_stack.append(num)
-			num_stack.append(expr[i])
-			num = ""
-		elif (expr[i] == ","):
-			num = num[::-1]
-			num_stack.append(num)
-			num = ""	
-		else:
-			num += expr[i]
-		i-=1
-	print(num_stack)	
-	"""
-	
 def doPRINT(toPRINT):
 	if(toPRINT[0:6] == "STRING"):
 		toPRINT= toPRINT[8:-1]
