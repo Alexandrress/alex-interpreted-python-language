@@ -1,0 +1,26 @@
+|VARIABLE = "Hello"
+|VAr2 = "Hdqdqsdqd"
+|ageAlex = 19-1
+|ageAlexd = |ageAlex
+
+PRINT "TEST PRINT"
+PRINT "Vive"
+PRINT "le"
+PRINT "AleX"
+
+PRINT "TEST NUM AND EXPR"
+PRINT 10 - (2/2) + (1+4)
+PRINT 21595
+
+PRINT "TEST VAR PRINT"
+PRINT |ageAlexd
+PRINT |VAr2
+
+PRINT "TEST INPUT"
+INPUT "Enter your name : " |nameAlex
+PRINT |nameAlex
+
+PRINT "TEST IF"
+IF 1 == 1 THEN
+	PRINT "HELLO WORLD"
+ENDIF
