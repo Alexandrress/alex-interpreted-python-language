@@ -27,6 +27,10 @@ def lex(filecontents):
 		if token == " ":
 			if state==0:
 				token=""
+				if varStarted==1: #You can't have space in VAR
+					tokens.append("VAR:" + var)
+					var = ""
+					varStarted=0
 			else:
 				token=" "
 		elif token == "\n" or token == "<EOF>":
@@ -87,6 +91,10 @@ def lex(filecontents):
 				tokens.append("EXPR:" + expr)
 				expr = ""
 				isexpr = 0
+			if var != "" and varStarted==1:
+				tokens.append("VAR:" + var)
+				var = ""
+				varStarted=0
 			tokens.append("THEN")
 			token = ""
 		elif token>="0" and token<="9﻿" :
@@ -113,7 +121,7 @@ def lex(filecontents):
 	
 def evalExpression(expr):
 	return (eval(expr, {'__builtins__':{}}))
-
+	
 def doPRINT(toPRINT):
 	if(toPRINT[0:6] == "STRING"):
 		toPRINT= toPRINT[8:-1]
@@ -177,11 +185,18 @@ def parse(tok):
 				i+=3
 			else :
 				i+=3
-		elif tok[i] + " " + tok[i+1][0:3] + " " + tok[i+2] + " " + tok[i+3][0:3] + " " + tok[i+4] == "IF NUM EQEQ NUM THEN":
+		elif tok[i] + " " + tok[i+1][0:3] + " " + tok[i+2] + " " + tok[i+3][0:3] + " " + tok[i+4] == "IF NUM EQEQ NUM THEN" :
 			if tok[i+1][4:] == tok[i+3][4:]:
 				cond = cond
 			else:
 				cond += 1
+			i+=5
+		elif tok[i] + " " + tok[i+1][0:3] + " " + tok[i+2] + " " + tok[i+3][0:3] + " " + tok[i+4] == "IF NUM EQEQ VAR THEN" :
+			VAR=(getVAR(tok[i+3])) #Get the VAR Value
+			if tok[i+1][4:] == VAR[8:-1]:
+					cond = cond
+			else :
+					cond += 1
 			i+=5
 
 
