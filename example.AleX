@@ -2,21 +2,33 @@
 |VAR = 5
 |VAR2 = 5+8-(5-2)*5
 
+PRINT "\n"
+
 PRINT "This is a normal PRINT in AleX"
+
+PRINT "\n"
+
 PRINT "I'm now going to PRINT an EXPR and a NUM"
 PRINT 10 - (2/2) + (1+4)
 PRINT 21595
 
-PRINT "I'm now going to print VAR"
+PRINT "\n"
+
+PRINT "I'm now going to print VAR" ~ This is a commentary to explain your code (⊙ω⊙) ~
 PRINT |VARIABLENAME
 PRINT |VAR
 PRINT |VAR2
+
+PRINT "\n"
 
 PRINT "You can also ask for user INPUT"
 INPUT "Enter your age : " |age
 PRINT |age
 
+PRINT "\n"
+
 PRINT "You can also check conditions"
+PRINT "If you entered an age of ninety there is a special message!"
 IF 90 == |age THEN
-	PRINT "Wow, old dude!"
+	PRINT "Wow, you're old dude!"
 ENDIF
