@@ -44,6 +44,8 @@
           <keyword>IF</keyword>
           <keyword>THEN</keyword>
           <keyword>ENDIF</keyword>
+          <keyword>ENDWHILE</keyword>
+          <keyword>WHILE</keyword>
         </context>
 
         <context id="if0-comment" style-ref="comment">
