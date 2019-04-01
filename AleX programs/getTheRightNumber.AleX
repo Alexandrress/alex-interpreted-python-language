@@ -10,12 +10,17 @@ WHILE |flag == 1 THEN
 	INPUT " " |numberGuess
 	IF 586 == |numberGuess THEN
 		|flag = 0
-		|LOOP2 = "Congratulations! You won! The right number was 5865. Press ENTER to exit."
+		|LOOP2 = "Congratulations! You won! The right number was 586. Press 0 to exit."
 	ENDIF
 	IF |numberGuess > 586 THEN
 		PRINT "Less!"
 	ENDIF
 	IF |numberGuess < 586 THEN
-		PRINT "More!"
+		IF |numberGuess > 0 THEN
+			PRINT "More!"
+		ENDIF
+	ENDIF
+	IF |numberGuess == 0 THEN
+		PRINT "EXIT"
 	ENDIF
 ENDWHILE
