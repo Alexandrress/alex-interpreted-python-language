@@ -1,6 +1,8 @@
 |VARIABLENAME = "Hello World"
 |VAR = 5
 |VAR2 = 5+8-(5-2)*5
+|age2 = 90
+|flag = 1
 
 PRINT "\n"
 
@@ -28,7 +30,32 @@ PRINT |age
 PRINT "\n"
 
 PRINT "You can also check conditions"
-PRINT "If you entered an age of ninety there is a special message!"
-IF 90 == |age THEN
+PRINT "If you entered an age of 90 there is a special message!"
+IF |age2 == |age THEN
 	PRINT "Wow, you're old dude!"
 ENDIF
+
+PRINT "\n"
+
+INPUT "Enter a number to get a special message! : " |number
+
+IF |number == 21 THEN
+	PRINT "Equal to 21!"
+ENDIF
+
+IF |number > 21 THEN
+	PRINT "Superior to 21!"
+ENDIF
+
+IF |number < 21 THEN
+	PRINT "Inferior to 21!"
+ENDIF
+
+PRINT "\n"
+
+WHILE |flag == 1 THEN
+	INPUT "Enter 21 to get out : " |numberto ~ It does the loop twice at least ~
+	IF |numberto == 21 THEN
+		|flag = 0
+	ENDIF
+ENDWHILE
