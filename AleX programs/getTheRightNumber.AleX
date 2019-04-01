@@ -1,5 +1,5 @@
 |numberGuess = 0
-PRINT "The number that you have to guess is between one and one hundred."
+PRINT "The number that you have to guess is between 1 and 100."
 
 INPUT "Enter a number : " |numberGuess
 
@@ -8,3 +8,4 @@ IF 26 == |numberGuess THEN
 ENDIF
 
 ~ This is a very basic program since there is no <, > and while yet in the language. ~
+~ Well this will be updated soon ! ~
