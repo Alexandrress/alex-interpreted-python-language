@@ -1,11 +1,21 @@
 |numberGuess = 0
-PRINT "The number that you have to guess is between 1 and 100."
+|flag = 1
+|LOOP = "Enter a number : "
+|LOOP2 = "The number that you have to guess is between 1 and 1000."
 
-INPUT "Enter a number : " |numberGuess
 
-IF 26 == |numberGuess THEN
-	PRINT "Congratulations! It is the correct number! :D"
-ENDIF
-
-~ This is a very basic program since there is no <, > and while yet in the language. ~
-~ Well this will be updated soon ! ~
+WHILE |flag == 1 THEN
+	PRINT "\n"
+	PRINT |LOOP2
+	INPUT " " |numberGuess
+	IF 586 == |numberGuess THEN
+		|flag = 0
+		|LOOP2 = "Congratulations! You won! The right number was 5865. Press ENTER to exit."
+	ENDIF
+	IF |numberGuess > 586 THEN
+		PRINT "Less!"
+	ENDIF
+	IF |numberGuess < 586 THEN
+		PRINT "More!"
+	ENDIF
+ENDWHILE
