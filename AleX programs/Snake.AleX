@@ -1,0 +1,11 @@
+NPRINT
+PRINT "Do you want to play SNAKE?" 
+PRINT "1. Yes"
+PRINT "2. No"
+NPRINT
+INPUT "Your answer : " |Input
+
+IF |Input == 1 THEN
+	SNAKE
+ENDIF
+
