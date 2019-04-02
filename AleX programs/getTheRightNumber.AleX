@@ -1,26 +1,25 @@
-|numberGuess = 0
+|number = RAND 1 TO 1000
 |flag = 1
-|LOOP = "Enter a number : "
-|LOOP2 = "The number that you have to guess is between 1 and 1000."
-
 
 WHILE |flag == 1 THEN
-	PRINT "\n"
-	PRINT |LOOP2
-	INPUT " " |numberGuess
-	IF 586 == |numberGuess THEN
+	NPRINT
+	INPUT "The number that you have to guess is between 1 and 1000. Input your guess : " |numberGuess
+	NPRINT
+	IF |number == |numberGuess THEN
 		|flag = 0
-		|LOOP2 = "Congratulations! You won! The right number was 586. Press 0 to exit."
+		PRINT "Congratulations! You won! The right number was :"
+		PRINT |number
 	ENDIF
-	IF |numberGuess > 586 THEN
+	IF |number > |numberGuess THEN
+		PRINT "More!"
+	ENDIF
+	IF |number < |numberGuess THEN
 		PRINT "Less!"
 	ENDIF
-	IF |numberGuess < 586 THEN
-		IF |numberGuess > 0 THEN
-			PRINT "More!"
-		ENDIF
-	ENDIF
-	IF |numberGuess == 0 THEN
-		PRINT "EXIT"
-	ENDIF
 ENDWHILE
+
+NPRINT
+
+CREDIT
+
+NPRINT
