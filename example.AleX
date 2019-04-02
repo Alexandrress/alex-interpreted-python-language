@@ -54,8 +54,24 @@ ENDIF
 PRINT "\n"
 
 WHILE |flag == 1 THEN
-	INPUT "Enter 21 to get out : " |numberto ~ It does the loop twice at least ~
+	PRINT "Enter 21 to get out : "
+	INPUT " " |numberto
+	PRINT "\n"
 	IF |numberto == 21 THEN
 		|flag = 0
+		PRINT "Congratulations !"
 	ENDIF
 ENDWHILE
+
+NPRINT ~ Same as PRINT "\n" ~
+
+|hasard = RAND 1 TO 100 ~ Random fonction ~
+
+PRINT "Random number from 1 to 100!"
+PRINT |hasard
+
+CREDIT ~ Just me being narcissic ~
+
+NPRINT
+
+SNAKE
