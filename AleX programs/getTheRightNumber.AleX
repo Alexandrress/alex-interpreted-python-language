@@ -1,22 +1,40 @@
 |number = RAND 1 TO 1000
-|flag = 1
+|life = 10
+|lifer = 0
 
-WHILE |flag == 1 THEN
-	NPRINT
+NPRINT
+
+PRINT "You have 10 tries! Good luck!"
+
+NPRINT
+
+WHILE 0 < |life THEN
 	INPUT "The number that you have to guess is between 1 and 1000. Input your guess : " |numberGuess
-	NPRINT
 	IF |number == |numberGuess THEN
-		|flag = 0
+		NPRINT
 		PRINT "Congratulations! You won! The right number was :"
 		PRINT |number
+		|lifer = |life
+		|life = 0
 	ENDIF
 	IF |number > |numberGuess THEN
 		PRINT "More!"
+		|life = |life - 1
 	ENDIF
 	IF |number < |numberGuess THEN
 		PRINT "Less!"
+		|life = |life - 1
 	ENDIF
+	NPRINT
 ENDWHILE
+
+|life = |lifer ~ This is because AND operator are not implanted ~
+
+IF |life == 0  THEN
+	PRINT "Too bad! The number was :"
+	PRINT |number
+ENDIF
+
 
 NPRINT
 
