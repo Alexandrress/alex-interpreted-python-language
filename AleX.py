@@ -294,6 +294,17 @@ def parse(tok):
 						s.blit(img, (xs[i], ys[i]))
 					s.blit(appleimage, applepos);t=f.render(str(score), True, (0, 0, 0));s.blit(t, (10, 10));pygame.display.update()
 			i+=1
+		elif tok[i][0:3] + " " + tok[i+1] + " " + tok[i+2][0:3] + " " + tok[i+3][0:4] == "VAR EQUALS VAR EXPR" : #considering VAR not INPUT
+			if condw == 0 and cond == 0 :
+				VAR1=getVAR(tok[i])
+				VAR2=getVAR(tok[i+2])
+				VAR1=int(VAR1[4:])
+				VAR2=int(VAR2[4:])
+				tok3=int(tok[i+3][5:])
+				VAR1=VAR2+tok3
+				VAR1=str(VAR1)
+				doASSIGN(tok[i],"NUM:"+VAR1)
+			i+=4
 		elif (tok[i] + " " + tok[i+1][0:6] == "PRINT STRING" or tok[i] + " " + tok[i+1][0:3] == "PRINT NUM" or tok[i] + " " + tok[i+1][0:4] == "PRINT EXPR" or tok[i] + " " + tok[i+1][0:3] == "PRINT VAR") :
 			if cond == 0 and condw == 0 :
 				if tok[i+1][0:6] == "STRING" :
@@ -344,7 +355,7 @@ def parse(tok):
 		elif tok[i] + " " + tok[i+1][0:3] + " " + tok[i+2] + " " + tok[i+3][0:3] + " " + tok[i+4] == "IF VAR EQEQ NUM THEN" : #considering VAR comes from INPUT
 			if condw == 0 :
 				VAR=(getVAR(tok[i+1])) #Get the VAR Value NUM
-				if tok[i+3][4:] == VAR[8:-1]:
+				if tok[i+3][4:] == VAR[8:-1] or tok[i+3][4:] == VAR[4:] :
 						cond = cond
 				else :
 						cond += 1
